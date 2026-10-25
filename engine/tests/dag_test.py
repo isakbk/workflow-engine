@@ -96,3 +96,34 @@ def test_cycle_message_has_stuck_names():
         assert "X" in str(e)
         assert "Y" in str(e)
         assert "Z" not in str(e)
+
+#A->B and B->A
+def test_validate_definition_rejects_cycle():
+    definition = {
+        "tasks": [
+            {"name": "A", "depends_on": ["B"]},
+            {"name": "B", "depends_on": ["A"]},
+        ]
+    }
+    try:
+        get_execution_order(definition)
+        assert False, "Expected WorkflowValidationError for cycle"
+    except WorkflowValidationError as e:
+        assert "cycle" in str(e).lower()
+
+
+#A->A
+def test_validate_definition_rejects_self_dependency():
+    definition = {
+        "tasks": [
+            {"name": "A", "depends_on": ["A"]},
+        ]
+    }
+    try:
+        get_execution_order(definition)
+        assert False, "Expected WorkflowValidationError for self-dependency"
+    except WorkflowValidationError as e:
+        assert "cannot depend on itself" in str(e).lower()
+
+    
+

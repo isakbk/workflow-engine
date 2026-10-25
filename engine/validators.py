@@ -83,14 +83,35 @@ def validate_definition(definition):
 
 
 def get_execution_order(definition):
-    tasks = definition["tasks"]
+    # Step 1: Validate definition
+    if not isinstance(definition, dict):
+        raise WorkflowValidationError(
+            "Definition must be a dictionary"
+        )
 
+    tasks = definition.get("tasks")
+
+    if not isinstance(tasks, list) or not tasks:
+        raise WorkflowValidationError(
+            "Definition must contain a non-empty tasks list"
+        )
+
+    # Step 2: Validate task names and initialize dictionaries
     in_degree = {}
     dependents = {}
 
-    # Step 1: Initialize dictionaries
-    for task in tasks:
-        name = task["name"]
+    for index, task in enumerate(tasks):
+        if not isinstance(task, dict):
+            raise WorkflowValidationError(
+                f"Task at position {index + 1} must be a dictionary"
+            )
+
+        name = task.get("name")
+
+        if not isinstance(name, str) or not name.strip():
+            raise WorkflowValidationError(
+                f"Task at position {index + 1} has an invalid name"
+            )
 
         if name in in_degree:
             raise WorkflowValidationError(
@@ -100,50 +121,56 @@ def get_execution_order(definition):
         in_degree[name] = 0
         dependents[name] = []
 
-    # Step 2: Validate dependencies and build graph
+    # Step 3: Validate dependencies
     for task in tasks:
         name = task["name"]
         dependencies = task.get("depends_on", [])
 
+        if not isinstance(dependencies, list):
+            raise WorkflowValidationError(
+                f"Task '{name}' depends_on must be a list"
+            )
+
         for dependency in dependencies:
 
-            # Check self-dependency
+            # A -> A: self-dependency
             if dependency == name:
                 raise WorkflowValidationError(
                     f"Task '{name}' cannot depend on itself"
                 )
 
-            # Check dependency exists
+            # Dependency must refer to an existing task
             if dependency not in in_degree:
                 raise WorkflowValidationError(
                     f"Task '{name}' depends on unknown task "
                     f"'{dependency}'"
                 )
 
+            # Build graph
             in_degree[name] += 1
             dependents[dependency].append(name)
 
-    # Step 3: Find tasks ready to execute
+    # Step 4: Find tasks with zero in-degree
     ready = [
         name
         for name, degree in in_degree.items()
         if degree == 0
     ]
 
-    # Step 4: Kahn's algorithm
+    # Step 5: Kahn's algorithm
     order = []
 
     while ready:
         current = ready.pop(0)
         order.append(current)
 
-        for task_name in dependents[current]:
-            in_degree[task_name] -= 1
+        for next_task in dependents[current]:
+            in_degree[next_task] -= 1
 
-            if in_degree[task_name] == 0:
-                ready.append(task_name)
+            if in_degree[next_task] == 0:
+                ready.append(next_task)
 
-    # Step 5: Detect remaining cycle
+    # Step 6: Detect cycles
     if len(order) != len(tasks):
         stuck_tasks = [
             name
@@ -156,7 +183,6 @@ def get_execution_order(definition):
         )
 
     return order
-
 
 
 
