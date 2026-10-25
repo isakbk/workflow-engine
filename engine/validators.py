@@ -77,3 +77,88 @@ def validate_definition(definition):
 
     if not check_dependencies(definition):
         raise WorkflowValidationError("Missing dependency")
+
+
+
+
+
+def get_execution_order(definition):
+    tasks = definition["tasks"]
+
+    in_degree = {}
+    dependents = {}
+
+    # Step 1: Initialize dictionaries
+    for task in tasks:
+        name = task["name"]
+
+        if name in in_degree:
+            raise WorkflowValidationError(
+                f"Duplicate task name: {name}"
+            )
+
+        in_degree[name] = 0
+        dependents[name] = []
+
+    # Step 2: Validate dependencies and build graph
+    for task in tasks:
+        name = task["name"]
+        dependencies = task.get("depends_on", [])
+
+        for dependency in dependencies:
+
+            # Check self-dependency
+            if dependency == name:
+                raise WorkflowValidationError(
+                    f"Task '{name}' cannot depend on itself"
+                )
+
+            # Check dependency exists
+            if dependency not in in_degree:
+                raise WorkflowValidationError(
+                    f"Task '{name}' depends on unknown task "
+                    f"'{dependency}'"
+                )
+
+            in_degree[name] += 1
+            dependents[dependency].append(name)
+
+    # Step 3: Find tasks ready to execute
+    ready = [
+        name
+        for name, degree in in_degree.items()
+        if degree == 0
+    ]
+
+    # Step 4: Kahn's algorithm
+    order = []
+
+    while ready:
+        current = ready.pop(0)
+        order.append(current)
+
+        for task_name in dependents[current]:
+            in_degree[task_name] -= 1
+
+            if in_degree[task_name] == 0:
+                ready.append(task_name)
+
+    # Step 5: Detect remaining cycle
+    if len(order) != len(tasks):
+        stuck_tasks = [
+            name
+            for name, degree in in_degree.items()
+            if degree > 0
+        ]
+
+        raise WorkflowValidationError(
+            f"Cycle detected. Stuck tasks: {stuck_tasks}"
+        )
+
+    return order
+
+
+
+
+
+
