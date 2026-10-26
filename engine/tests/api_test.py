@@ -101,3 +101,54 @@ def test_list_workflows(api_client, valid_workflow):
         results = results["results"]
 
     assert any(workflow["name"] == "test_workflow" for workflow in results)
+
+
+@pytest.mark.django_db
+def test_get_workflow_by_id_returns_200(api_client, valid_workflow):
+    # Create a workflow first
+    create_response = api_client.post(
+        "/api/workflow/",
+        valid_workflow,
+        format="json",
+    )
+    assert create_response.status_code == 201
+    workflow_id = create_response.data["id"]
+
+    # Get the workflow by id
+    response = api_client.get(f"/api/workflows/{workflow_id}/")
+    assert response.status_code == 200
+    assert response.data["name"] == valid_workflow["name"]
+    assert response.data["definition"] == valid_workflow["definition"]
+
+
+@pytest.mark.django_db
+def test_get_workflow_has_expected_fields(api_client, valid_workflow):
+    # Create a workflow first
+    create_response = api_client.post(
+        "/api/workflow/",
+        valid_workflow,
+        format="json",
+    )
+    assert create_response.status_code == 201
+    workflow_id = create_response.data["id"]
+
+    # Get the workflow by id
+    response = api_client.get(f"/api/workflows/{workflow_id}/")
+    assert response.status_code == 200
+    expected_fields = {
+        "id",
+        "name",
+        "definition",
+        "cron",
+        "is_active",
+        "version",
+        "created_at",
+    }
+    assert set(response.data.keys()) == expected_fields
+
+
+@pytest.mark.django_db
+def test_get_missing_workflow_returns_404(api_client):
+    # Try to get a workflow that doesn't exist
+    response = api_client.get("/api/workflows/9999/")
+    assert response.status_code == 404
