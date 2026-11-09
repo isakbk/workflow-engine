@@ -1,0 +1,574 @@
+<mxfile host="65bd71144e" pages="3">
+    <diagram name="1 Architecture" id="1_Architecture">
+        <mxGraphModel dx="1078" dy="475" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="1 _laneapi" value="&lt;b&gt;API layer — Django REST Framework  (engine/views.py, urls.py)&lt;/b&gt;" style="rounded=1;html=1;whiteSpace=wrap;arcSize=3;fillColor=#f7f8fb;strokeColor=#aab1c0;dashed=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontSize=13;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="160" width="1420" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lanev" value="&lt;b&gt;Validation — gatekeepers (run before saving)&lt;/b&gt;" style="rounded=1;html=1;whiteSpace=wrap;arcSize=3;fillColor=#f7f8fb;strokeColor=#aab1c0;dashed=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontSize=13;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="380" width="660" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lanelg" value="&lt;b&gt;How to read this page&lt;/b&gt;" style="rounded=1;html=1;whiteSpace=wrap;arcSize=3;fillColor=#f7f8fb;strokeColor=#aab1c0;dashed=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontSize=13;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="740" y="380" width="720" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _laned" value="&lt;b&gt;Database — the engine's memory (source of truth)&lt;/b&gt;" style="rounded=1;html=1;whiteSpace=wrap;arcSize=3;fillColor=#f7f8fb;strokeColor=#aab1c0;dashed=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontSize=13;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="600" width="1420" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lanee" value="&lt;b&gt;Engine core — the heart (scheduling and running tasks)&lt;/b&gt;" style="rounded=1;html=1;whiteSpace=wrap;arcSize=3;fillColor=#f7f8fb;strokeColor=#aab1c0;dashed=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontSize=13;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="800" width="1420" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lanei" value="&lt;b&gt;Infrastructure and delivery&lt;/b&gt;" style="rounded=1;html=1;whiteSpace=wrap;arcSize=3;fillColor=#f7f8fb;strokeColor=#aab1c0;dashed=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontSize=13;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="1020" width="1420" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e1" value="HTTP + JSON" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _clients" target="1 _laneapi" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e2" value="workflow JSON" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _e1" target="1 _v1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e3" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _v1" target="1 _v2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e4" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _v2" target="1 _v3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e5" value="valid → save" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _v3" target="1 _d1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e6" value="Run + TaskRuns" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _c1" target="1 _d2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e7" value="set Run status" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _c2" target="1 _d2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e8" value="read / update" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _c3" target="1 _d3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e9" value="update status" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _c4" target="1 _d3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e10" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="1 _c4" target="1 _c5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e11" value="attempt logs" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="1 _c6" target="1 _d4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e12" value="queue ready" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="1 _c3" target="1 _i1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e13" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="1 _i1" target="1 _i2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e14" value="runs in" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="1 _i2" target="1 _c4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e15" value="cron trigger" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="1 _i4" target="1 _c3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _1 e16" value="calls API" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="1 _i5" target="1 _laneapi" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="22" y="1110"/>
+                            <mxPoint x="22" y="255"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="1 _clients" value="&lt;b&gt;Clients&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Postman · browsable API · service website · React dashboard (Phase 6)&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#ffffff;strokeColor=#444b5a;fontColor=#1b1f2a;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="76" width="460" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _e1" value="&lt;b&gt;POST · GET /api/workflows/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;create + list · R5.3 ✓&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="200" width="215" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _e2" value="&lt;b&gt;GET /api/workflows/{id}/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;detail + 404 · R5.4 ✓&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="200" width="215" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _e3" value="&lt;b&gt;GET /api/health/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;R1 ✓&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="200" width="215" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _e4" value="&lt;b&gt;POST /api/workflows/{id}/runs/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;start a run → Create TaskRuns · R6.3&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="750" y="200" width="215" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _e5" value="&lt;b&gt;GET /api/runs/{id}/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;status + tasks · Phase 2–4&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="980" y="200" width="215" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _e6" value="&lt;b&gt;cancel · retry · dead-letter · metrics&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Phase 4–5&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1210" y="200" width="215" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _v1" value="&lt;b&gt;WorkflowSerializer&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;checks field shape, calls the validator&lt;br&gt;R5.1, R5.2 ✓&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="420" width="195" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _v2" value="&lt;b&gt;validate_definition&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;tasks list, name + fn, unique names, dependencies&lt;br&gt;R3 ✓&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="420" width="195" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _v3" value="&lt;b&gt;get_execution_order&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Kahn's algorithm: order or cycle error&lt;br&gt;R4 ✓&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="420" width="195" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lg0" value="&lt;b&gt;DONE ✓&lt;/b&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="760" y="420" width="155" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lg1" value="&lt;b&gt;IN PROGRESS&lt;/b&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#fff1c2;strokeColor=#d99a00;fontColor=#7a4b00;" parent="1" vertex="1">
+                    <mxGeometry x="930" y="420" width="155" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lg2" value="&lt;b&gt;NEXT (Phase 2)&lt;/b&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1100" y="420" width="155" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lg3" value="&lt;b&gt;LATER (Phase 3–7)&lt;/b&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1270" y="420" width="155" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _d2" value="&lt;b&gt;Run&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;R6.1 ✓&lt;/font&gt;" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=12;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="215" y="640" width="150" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _d1" value="&lt;b&gt;Workflow&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;R2 ✓&lt;/font&gt;" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=12;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="522" y="640" width="150" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _d3" value="&lt;b&gt;TaskRun&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;R6.2 ← you are here&lt;/font&gt;" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=12;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#fff1c2;strokeColor=#d99a00;fontColor=#7a4b00;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="640" width="150" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _d4" value="&lt;b&gt;Attempt&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Phase 4&lt;/font&gt;" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=12;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1288" y="640" width="150" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _c1" value="&lt;b&gt;Create TaskRuns&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;when a Run starts, one TaskRun per task&lt;br&gt;R6.3&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="56" y="840" width="225" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _c2" value="&lt;b&gt;Run final status&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;all SUCCESS → Run SUCCESS&lt;br&gt;any DEAD → Run FAILED&lt;br&gt;R6.8&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="295" y="840" width="225" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _c3" value="&lt;b&gt;Scheduler&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;which tasks are ready?&lt;br&gt;(Kahn's idea, on database status)&lt;br&gt;R6.4, R6.7&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="534" y="840" width="225" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _c4" value="&lt;b&gt;Worker&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;run one task, update its status&lt;br&gt;R6.6 (Celery in Phase 3)&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="773" y="840" width="225" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _c5" value="&lt;b&gt;Function registry&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;fn name → Python function&lt;br&gt;R6.5&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1012" y="840" width="225" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _c6" value="&lt;b&gt;Reliability&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;retry · backoff · timeout · dead-letter&lt;br&gt;idempotency · heartbeat · reaper&lt;br&gt;Phase 4&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1251" y="840" width="225" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _i5" value="&lt;b&gt;React dashboard&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;6 pages · Phase 6&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="1060" width="200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _i4" value="&lt;b&gt;Cron · priority · limits&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Phase 5&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="330" y="1060" width="200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _i1" value="&lt;b&gt;Redis queue&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;ready task ids · Phase 3&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="666" y="1060" width="200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _i2" value="&lt;b&gt;Celery workers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;parallel execution · Phase 3&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="1060" width="200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _i3" value="&lt;b&gt;Docker Compose&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Phase 3&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1130" y="1060" width="150" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _i6" value="&lt;b&gt;Tests · CI · deploy&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Phase 7&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1310" y="1060" width="130" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _title" value="&lt;b&gt;Workflow Orchestration Engine — Architecture: built vs left&lt;/b&gt;" style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=left;fontSize=20;fontColor=#1b1f2a;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="14" width="900" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _sub" value="R-numbers are your task tickets (R6.3 = ticket R6.3). Colour = status. Updated: Oct 2026" style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=left;fontSize=12;fontColor=#566074;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="44" width="1000" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="1 _lgt" value="Read top to bottom: a request enters the API → is checked by the gatekeepers → is saved in the database → the engine core schedules and runs the tasks → the infrastructure (Redis, Celery, Docker) lets it scale. Dashed lines = built in a later phase." style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=left;fontSize=12;fontColor=#394150;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="760" y="482" width="680" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="1JB5dnJ0Zt7N779Ha-92-1" value="Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="555" y="575" width="50" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="2 Task roadmap" id="2_Task_roadmap">
+        <mxGraphModel dx="1078" dy="475" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1260" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2 _2 e1" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t0_0" target="2 _t0_1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e2" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t0_1" target="2 _t0_2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e3" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t0_2" target="2 _t0_3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e4" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t0_3" target="2 _t0_4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e5" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _p0" target="2 _t0_0" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e6" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#1b1f2a;" parent="1" source="2 _p0" target="2 _p1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e7" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t1_0" target="2 _t1_1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e8" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t1_1" target="2 _t1_2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e9" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t1_2" target="2 _t1_3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e10" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t1_3" target="2 _t1_4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e11" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t1_4" target="2 _t1_5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e12" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t1_5" target="2 _t1_6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e13" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t1_6" target="2 _t1_7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e14" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t1_7" target="2 _t1_8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e15" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _p1" target="2 _t1_0" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e16" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#1b1f2a;" parent="1" source="2 _p1" target="2 _p2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e17" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t2_0" target="2 _t2_1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e18" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t2_1" target="2 _t2_2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e19" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t2_2" target="2 _t2_3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e20" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _p2" target="2 _t2_0" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e21" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#1b1f2a;" parent="1" source="2 _p2" target="2 _p3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e22" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t3_0" target="2 _t3_1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e23" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t3_1" target="2 _t3_2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e24" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t3_2" target="2 _t3_3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e25" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t3_3" target="2 _t3_4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e26" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t3_4" target="2 _t3_5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e27" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t3_5" target="2 _t3_6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e28" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _p3" target="2 _t3_0" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e29" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#1b1f2a;" parent="1" source="2 _p3" target="2 _p4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e30" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t4_0" target="2 _t4_1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e31" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t4_1" target="2 _t4_2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e32" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t4_2" target="2 _t4_3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e33" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t4_3" target="2 _t4_4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e34" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _p4" target="2 _t4_0" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e35" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#1b1f2a;" parent="1" source="2 _p4" target="2 _p5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e36" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t5_0" target="2 _t5_1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e37" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t5_1" target="2 _t5_2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e38" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t5_2" target="2 _t5_3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e39" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _p5" target="2 _t5_0" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e40" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#1b1f2a;" parent="1" source="2 _p5" target="2 _p6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e41" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t6_0" target="2 _t6_1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e42" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t6_1" target="2 _t6_2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e43" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t6_2" target="2 _t6_3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e44" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _t6_3" target="2 _t6_4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _2 e45" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="2 _p6" target="2 _t6_0" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _lg0" value="&lt;b&gt;DONE ✓&lt;/b&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="1180" y="20" width="115" height="34" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _lg1" value="&lt;b&gt;IN PROGRESS&lt;/b&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#fff1c2;strokeColor=#d99a00;fontColor=#7a4b00;" parent="1" vertex="1">
+                    <mxGeometry x="1305" y="20" width="115" height="34" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _lg2" value="&lt;b&gt;NEXT&lt;/b&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1430" y="20" width="115" height="34" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _lg3" value="&lt;b&gt;LATER&lt;/b&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1555" y="20" width="115" height="34" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _p0" value="&lt;b&gt;Phase 1 · Foundation&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Tasks 1–5 · DONE ✓&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="90" width="200" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t0_0" value="&lt;b&gt;R1 Setup&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Django + DRF + pytest&lt;br&gt;health API&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="90" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t0_1" value="&lt;b&gt;R2 Workflow model&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;table, unique name,&lt;br&gt;model tests&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="404" y="90" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t0_2" value="&lt;b&gt;R3 Validator&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;R3.1 dict + tasks&lt;br&gt;R3.2 each task&lt;br&gt;R3.3 names + deps&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="558" y="90" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t0_3" value="&lt;b&gt;R4 Kahn's&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;R4.1 paper&lt;br&gt;R4.2 function&lt;br&gt;R4.3 reject cycles&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="712" y="90" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t0_4" value="&lt;b&gt;R5 Workflow API&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;R5.1 serializer&lt;br&gt;R5.2 uses validator&lt;br&gt;R5.3 create + list&lt;br&gt;R5.4 detail&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="866" y="90" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _p1" value="&lt;b&gt;Phase 2 · Run it&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Tasks 6–11 · IN PROGRESS&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#fff1c2;strokeColor=#d99a00;fontColor=#7a4b00;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="250" width="200" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_0" value="&lt;b&gt;R6.1 Run model&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;workflow link,&lt;br&gt;status, trigger&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#d4f8dc;strokeColor=#2ea043;fontColor=#14532d;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_1" value="&lt;b&gt;R6.2 TaskRun model&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;status, attempt,&lt;br&gt;depends_on&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#fff1c2;strokeColor=#d99a00;fontColor=#7a4b00;" parent="1" vertex="1">
+                    <mxGeometry x="404" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_2" value="&lt;b&gt;R6.3 Create TaskRuns&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;start-run API&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="558" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_3" value="&lt;b&gt;R6.4 Ready tasks&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;which tasks can&lt;br&gt;run now?&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="712" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_4" value="&lt;b&gt;R6.5 Registry&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;fn name → Python&lt;br&gt;function&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="866" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_5" value="&lt;b&gt;R6.6 Run one task&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;update status&lt;br&gt;after running&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1020" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_6" value="&lt;b&gt;R6.7 Scheduler&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;one full cycle&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_7" value="&lt;b&gt;R6.8 Run status&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;SUCCESS / FAILED&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1328" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t1_8" value="&lt;b&gt;R6.9 First full run&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;workflow runs&lt;br&gt;end to end&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1482" y="250" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _p2" value="&lt;b&gt;Phase 3 · Parallel&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Tasks 12–15 · LATER&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="410" width="200" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t2_0" value="&lt;b&gt;Docker Compose&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;PostgreSQL + Redis&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="410" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t2_1" value="&lt;b&gt;Celery&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;background workers&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="404" y="410" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t2_2" value="&lt;b&gt;Safe claiming&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;no double-pick&lt;br&gt;(SKIP LOCKED)&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="558" y="410" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t2_3" value="&lt;b&gt;Many workers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;parallel run&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="712" y="410" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _p3" value="&lt;b&gt;Phase 4 · Reliability&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Tasks 16–22 · LATER&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="570" width="200" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t3_0" value="&lt;b&gt;Attempt logs&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;every try saved&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="570" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t3_1" value="&lt;b&gt;Retry + backoff&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;wait, then retry&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="404" y="570" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t3_2" value="&lt;b&gt;Timeout&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;stop stuck tasks&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="558" y="570" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t3_3" value="&lt;b&gt;Dead-letter queue&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;give up safely&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="712" y="570" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t3_4" value="&lt;b&gt;Heartbeat&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;worker is alive&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="866" y="570" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t3_5" value="&lt;b&gt;Reaper&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;recover dead&lt;br&gt;worker tasks&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1020" y="570" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t3_6" value="&lt;b&gt;Idempotency&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;twice = once&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="570" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _p4" value="&lt;b&gt;Phase 5 · Control&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Tasks 23–27 · LATER&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="730" width="200" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t4_0" value="&lt;b&gt;Cancel&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;stop a run&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="730" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t4_1" value="&lt;b&gt;Cron&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;run on schedule&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="404" y="730" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t4_2" value="&lt;b&gt;Priority&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;important first&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="558" y="730" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t4_3" value="&lt;b&gt;Parallel limit&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;do not overload&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="712" y="730" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t4_4" value="&lt;b&gt;Metrics&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;success rate,&lt;br&gt;latency&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="866" y="730" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _p5" value="&lt;b&gt;Phase 6 · Dashboard&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Tasks 28–31 · LATER&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="890" width="200" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t5_0" value="&lt;b&gt;React setup&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;project + API calls&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="890" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t5_1" value="&lt;b&gt;Runs list&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;filter by status&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="404" y="890" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t5_2" value="&lt;b&gt;Run detail&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;DAG picture,&lt;br&gt;colours&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="558" y="890" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t5_3" value="&lt;b&gt;Other pages&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;workflows, DLQ,&lt;br&gt;home&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="712" y="890" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _p6" value="&lt;b&gt;Phase 7 · Proof&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Tasks 32–36 · LATER&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="1050" width="200" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t6_0" value="&lt;b&gt;Chaos tests&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;kill a worker,&lt;br&gt;nothing lost&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="1050" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t6_1" value="&lt;b&gt;Load test&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;real numbers&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="404" y="1050" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t6_2" value="&lt;b&gt;README + CI&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;diagram, tests on push&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="558" y="1050" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t6_3" value="&lt;b&gt;Deploy&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;live link&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="712" y="1050" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _t6_4" value="&lt;b&gt;First client&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;service website&lt;br&gt;calls the engine&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="866" y="1050" width="140" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _title" value="&lt;b&gt;Task roadmap — every task, connected phase by phase&lt;/b&gt;" style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=left;fontSize=20;fontColor=#1b1f2a;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="14" width="1200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _sub" value="Each box = one ticket. Arrows show the order. Green done · amber now · blue next · grey later." style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=left;fontSize=12;fontColor=#566074;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="44" width="1300" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="2 _here" value="&lt;b&gt;▼ you are here&lt;/b&gt;" style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=center;fontSize=12;fontColor=#b45309;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="414" y="226" width="130" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="3 Run logic" id="3_Run_logic">
+        <mxGraphModel dx="1078" dy="475" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="920" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3 _3 e1" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="3 _s1" target="3 _s2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _3 e2" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="3 _s2" target="3 _s3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _3 e3" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="3 _s3" target="3 _dq" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _3 e4" value="yes" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="3 _dq" target="3 _s4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _3 e5" value="no" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="3 _dq" target="3 _s5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _3 e6" value="next ready task (loop)" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="3 _s4" target="3 _s2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1350" y="92"/>
+                            <mxPoint x="485" y="92"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3 _3 e7" value="retry after waiting" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="3 _s5" target="3 _s3" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1100" y="335"/>
+                            <mxPoint x="800" y="335"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3 _3 e8" value="no tasks left" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="3 _s4" target="3 _s6" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1510" y="175"/>
+                            <mxPoint x="1510" y="500"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3 _3 e9" value="DEAD → Run FAILED" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;dashed=1;" parent="1" source="3 _s5" target="3 _s6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _3 e10" value="" style="edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.6;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#3b4254;" parent="1" source="3 _s6" target="3 _s7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _s1" value="&lt;b&gt;1 · Run is created&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Order arrives → Run #2 (PENDING)&lt;br&gt;+ 3 TaskRuns (PENDING)&lt;br&gt;R6.3&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="170" width="260" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _s2" value="&lt;b&gt;2 · Scheduler: what is ready?&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;a task whose dependencies are all SUCCESS&lt;br&gt;becomes QUEUED (confirm_order first)&lt;br&gt;R6.4, R6.7&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="170" width="270" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _s3" value="&lt;b&gt;3 · Worker runs the task&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;find the function (registry), run it&lt;br&gt;TaskRun → RUNNING&lt;br&gt;R6.5, R6.6&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="670" y="170" width="260" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _dq" value="&lt;b&gt;Did it work?&lt;/b&gt;" style="rhombus;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#ffffff;strokeColor=#444b5a;fontColor=#1b1f2a;" parent="1" vertex="1">
+                    <mxGeometry x="985" y="165" width="170" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _s4" value="&lt;b&gt;4a · SUCCESS&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;TaskRun → SUCCESS&lt;br&gt;scheduler asks again: next task ready?&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1230" y="120" width="240" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _s5" value="&lt;b&gt;4b · FAILED&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;attempts left? → RETRYING (wait)&lt;br&gt;no attempts left → DEAD&lt;br&gt;Phase 4&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#eceff4;strokeColor=#8a94a6;fontColor=#394150;" parent="1" vertex="1">
+                    <mxGeometry x="1230" y="280" width="240" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _s6" value="&lt;b&gt;5 · Run final status&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;all TaskRuns SUCCESS → Run SUCCESS&lt;br&gt;any task DEAD → Run FAILED&lt;br&gt;R6.8&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="1230" y="440" width="240" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _s7" value="&lt;b&gt;6 · First full run 🎉&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;R6.9: the whole workflow runs end to end,&lt;br&gt;the Run shows SUCCESS in the database&lt;/font&gt;" style="rounded=1;arcSize=10;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#dbeafe;strokeColor=#3b82f6;fontColor=#1e3a8a;" parent="1" vertex="1">
+                    <mxGeometry x="830" y="440" width="350" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _tbl" value="&lt;b&gt;What the database looks like at each moment&lt;/b&gt; (Run #2 and its three TaskRuns)&lt;br&gt;&lt;table style=&quot;border-collapse:collapse;margin-top:6px;&quot;&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#1b1f2a;color:#ffffff;font-size:11px;&quot;&gt;Moment&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#1b1f2a;color:#ffffff;font-size:11px;&quot;&gt;Run #2&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#1b1f2a;color:#ffffff;font-size:11px;&quot;&gt;confirm_order&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#1b1f2a;color:#ffffff;font-size:11px;&quot;&gt;make_invoice&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#1b1f2a;color:#ffffff;font-size:11px;&quot;&gt;send_message&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#ffffff;color:#1b1f2a;font-size:11px;&quot;&gt;Run #2 created&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#eceff4;color:#1b1f2a;font-size:11px;&quot;&gt;PENDING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#eceff4;color:#1b1f2a;font-size:11px;&quot;&gt;PENDING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#eceff4;color:#1b1f2a;font-size:11px;&quot;&gt;PENDING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#eceff4;color:#1b1f2a;font-size:11px;&quot;&gt;PENDING&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#ffffff;color:#1b1f2a;font-size:11px;&quot;&gt;confirm_order starts&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#fff1c2;color:#1b1f2a;font-size:11px;&quot;&gt;RUNNING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#fff1c2;color:#1b1f2a;font-size:11px;&quot;&gt;RUNNING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#eceff4;color:#1b1f2a;font-size:11px;&quot;&gt;PENDING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#eceff4;color:#1b1f2a;font-size:11px;&quot;&gt;PENDING&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#ffffff;color:#1b1f2a;font-size:11px;&quot;&gt;confirm_order done&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#fff1c2;color:#1b1f2a;font-size:11px;&quot;&gt;RUNNING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#dbeafe;color:#1b1f2a;font-size:11px;&quot;&gt;QUEUED&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#eceff4;color:#1b1f2a;font-size:11px;&quot;&gt;PENDING&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#ffffff;color:#1b1f2a;font-size:11px;&quot;&gt;make_invoice done&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#fff1c2;color:#1b1f2a;font-size:11px;&quot;&gt;RUNNING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#dbeafe;color:#1b1f2a;font-size:11px;&quot;&gt;QUEUED&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#ffffff;color:#1b1f2a;font-size:11px;&quot;&gt;send_message fails once&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#fff1c2;color:#1b1f2a;font-size:11px;&quot;&gt;RUNNING&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#ffe4e1;color:#1b1f2a;font-size:11px;&quot;&gt;RETRYING (try 1 of 3)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#ffffff;color:#1b1f2a;font-size:11px;&quot;&gt;send_message works&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;td style=&quot;border:1px solid #8a94a6;padding:4px 10px;background:#d4f8dc;color:#1b1f2a;font-size:11px;&quot;&gt;SUCCESS&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=1;arcSize=4;align=left;verticalAlign=top;spacing=8;html=1;whiteSpace=wrap;strokeWidth=2;fontSize=12;fillColor=#ffffff;strokeColor=#444b5a;fontColor=#1b1f2a;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="610" width="1000" height="270" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _title" value="&lt;b&gt;Run logic — what happens when one order arrives (Sita's order)&lt;/b&gt;" style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=left;fontSize=20;fontColor=#1b1f2a;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="14" width="1200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _sub" value="Workflow = recipe (confirm → invoice → message). Run = cooking it once. TaskRun = each step of that cooking." style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=left;fontSize=12;fontColor=#566074;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="44" width="1300" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="3 _note" value="&lt;b&gt;How the tickets connect&lt;/b&gt;&lt;br&gt;&lt;br&gt;R6.1–R6.2 build the tables that remember everything.&lt;br&gt;R6.3 fills them when a Run starts.&lt;br&gt;R6.4 + R6.7 decide what runs next.&lt;br&gt;R6.5 + R6.6 actually run it.&lt;br&gt;R6.8 closes the Run.&lt;br&gt;R6.9 proves it all works together.&lt;br&gt;&lt;br&gt;Phase 4 adds retry, timeout, heartbeat and idempotency to the red 'FAILED' path." style="text;html=1;whiteSpace=wrap;verticalAlign=top;align=left;fontSize=12;fontColor=#394150;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1080" y="620" width="420" height="240" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
