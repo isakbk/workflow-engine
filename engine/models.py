@@ -1,6 +1,7 @@
 from enum import unique
 from socket import timeout
 from django.db import models
+from django.db.models.functions.datetime import TruncWeek
 
 class Workflow(models.Model):
     name=models.CharField(max_length=100, unique=True)
@@ -84,3 +85,35 @@ class TaskRun(models.Model):
 
     def __str__(self):
         return f"Run #{self.run.id}: {self.name}"
+
+
+class Attempt(models.Model):
+    task_run = models.ForeignKey("TaskRun", on_delete=models.CASCADE, related_name="attempts")
+    number = models.PositiveIntegerField()
+    status = models.CharField(max_length=10, choices=[("SUCCESS", "SUCCESS"), ("FAILED", "FAILED")])
+    worker_id =models.CharField(max_length=100)
+    started_at = models.DateTimeField()
+    finished_at = models.DateTimeField(blank=True, null=True)
+    error=models.TextField(default="", blank=True) 
+
+    class Meta:
+      constraints = [
+        models.UniqueConstraint(
+            fields=["task_run", "number"],
+            name="unique_attempt_number_per_task"
+             )
+        ]
+
+      ordering = ["number"]
+    
+    def __str__(self):
+     return f"{self.task_run.name} - Attempt {self.number}"
+
+
+class IdempotencyRecord(models.Model):
+    key = models.CharField(max_length=200, unique=True)
+    result = models.JSONField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.key
