@@ -1,4 +1,5 @@
 from enum import unique
+from socket import timeout
 from django.db import models
 
 class Workflow(models.Model):
@@ -13,7 +14,13 @@ class Workflow(models.Model):
     def __str__(self):
         return self.name
 
-status_choices_list=[("PENDING", "Pending"), ("RUNNING", "Running"), ("SUCCESS", "sucess"), ("FAILED", "Failed"), ("CANCELLED", "Cancelled")]
+status_choices_list=[
+    ("PENDING", "Pending"), 
+    ("RUNNING", "Running"), 
+    ("SUCCESS", "sucess"), 
+    ("FAILED", "Failed"), 
+    ("CANCELLED", "Cancelled")
+]
 trigger_choices_list=[("MANUAL","manual"),("CRON",("cron"))]
 
 class Run(models.Model):
@@ -27,4 +34,53 @@ class Run(models.Model):
 
     def __str__(self):
      return f"Run #{self.id} of {self.workflow.name}"
+values = [("PENDING", "PENDING"), ("QUEUED", "QUEUED"), ("RUNNING", "RUNNING"), ("SUCCESS", "SUCCESS"), ("FAILED", "FAILED"),
+              ("RETRYING", "RETRYING"), ("DEAD", "DEAD"), ("SKIPPED", "SKIPPED"), ("CANCELLED", "CANCELLED")]
+class TaskRun(models.Model):
+    run=models.ForeignKey("RUN", on_delete=models.CASCADE, related_name="task_runs")
+    name=models.CharField(max_length=100)
+    fn=models.CharField(max_length=100)
+    depends_on=models.JSONField(default=list, blank=True)
+    status=models.CharField(max_length=20, choices=values, default="PENDING")
+    attempt=models.PositiveIntegerField(default=0)
+    max_attempts=models.PositiveIntegerField(default=3)
+    timeout_seconds=models.PositiveIntegerField(default=60)
+    next_retry_at=models.DateTimeField(null=True, blank=True)
+    last_heartbeat=models.DateTimeField(null=True, blank=True)
+    worker_id=models.CharField(max_length=100, default="", blank=True)
+    idempotency_key=models.CharField(max_length=200, unique=True)
+    output=models.JSONField(default=None, blank=True, null=True)
+    error=models.TextField(default="", blank=True)
+    started_at=models.DateTimeField(default=None, null=True, blank=True)
+    finished_at=models.DateTimeField(default=None, null=True, blank=True)
+    
 
+    TERMINAL = {"SUCCESS", "DEAD", "SKIPPED", "CANCELLED"}
+
+    # Your existing fields...
+
+    class Meta:
+      constraints = [
+        models.UniqueConstraint(
+            fields=["run", "name"],
+            name="unique_task_per_run"
+        )
+    ]
+
+      indexes = [
+        models.Index(
+            fields=["status", "next_retry_at"],
+            name="task_status_retry_idx"
+        ),
+        models.Index(
+            fields=["status", "last_heartbeat"],
+            name="task_status_heartbeat_idx"
+        ),
+        models.Index(
+            fields=["run", "status"],
+            name="task_run_status_idx"
+        ),
+    ]
+
+    def __str__(self):
+        return f"Run #{self.run.id}: {self.name}"
