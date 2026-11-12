@@ -1,83 +1,115 @@
 
 def find_cycle(graph):
 
-    # Step 1: Copy graph (original graph modify नगर्ने)
-    replica = {
-        key: list(value)
-        for key, value in graph.items()
-    }
+    # Step 1: Original graph को copy बनाउने
+    replica = {}
 
-    # Step 2: Unknown dependencies ignore गर्ने
+    for key, value in graph.items():
+        replica[key] = value.copy()
+
+    # Step 2: Unknown dependencies हटाउने
     for key in replica:
-        replica[key] = [
-            dependency
-            for dependency in replica[key]
-            if dependency in replica
-        ]
+
+        lists = []
+
+        for dependency in replica[key]:
+
+            if dependency in replica:
+                lists.append(dependency)
+
+        replica[key] = lists
 
     # Step 3: Kahn's Algorithm
     while True:
 
-        ready = []
+        lists = []
 
-        for key, dependencies in replica.items():
-            if not dependencies:
-                ready.append(key)
+        # Dependency नभएका tasks खोज्ने
+        for key, value in replica.items():
 
-        if not ready:
+            count = len(value)
+
+            if count == 0:
+                lists.append(key)
+
+        # Ready task नभए Kahn's Algorithm रोक्ने
+        if len(lists) == 0:
             break
 
-        for task in ready:
+        # Ready tasks हटाउने
+        for task in lists:
             del replica[task]
 
-        for dependencies in replica.values():
-            for task in ready:
-                if task in dependencies:
-                    dependencies.remove(task)
+        # बाँकी tasks बाट हटाइएको task को dependency हटाउने
+        for key in replica:
 
-    # Step 4: Leftover graph मा cycle खोज्ने
-    # Iterative DFS (recursion प्रयोग नगर्ने)
+            for task in lists:
 
-    state = {key: 0 for key in replica}
+                if task in replica[key]:
+                    replica[key].remove(task)
+
+    # Step 4: Leftover graph मा DFS गर्ने
+
+    dicts = {}
+
+    for key in replica:
+        dicts[key] = 0
 
     for start in replica:
 
-        if state[start] != 0:
+        if dicts[start] != 0:
             continue
 
         path = [start]
-        positions = {start: 0}
-        stack = [(start, iter(replica[start]))]
-        state[start] = 1
+
+        positions = {
+            start: 0
+        }
+
+        stack = [(start, 0)]
+
+        dicts[start] = 1
 
         while stack:
 
-            node, neighbors = stack[-1]
+            node, count = stack[-1]
 
-            try:
-                neighbor = next(neighbors)
+            # सबै dependencies जाँच भइसकेको छ कि छैन?
+            if count >= len(replica[node]):
 
-            except StopIteration:
                 stack.pop()
-                state[node] = 2
+
+                dicts[node] = 2
+
                 positions.pop(node)
+
                 path.pop()
+
                 continue
 
-            if state[neighbor] == 0:
+            # एउटा dependency निकाल्ने
+            neighbor = replica[node][count]
 
-                state[neighbor] = 1
+            # अर्को पटक अर्को dependency जाँच गर्न index बढाउने
+            stack[-1] = (node, count + 1)
+
+            # Case 1: नयाँ task भेटियो
+            if dicts[neighbor] == 0:
+
+                dicts[neighbor] = 1
+
                 positions[neighbor] = len(path)
+
                 path.append(neighbor)
 
-                stack.append(
-                    (neighbor, iter(replica[neighbor]))
-                )
+                stack.append((neighbor, 0))
 
-            elif state[neighbor] == 1:
+            # Case 2: पहिले नै Visiting task भेटियो
+            elif dicts[neighbor] == 1:
 
                 cycle_start = positions[neighbor]
 
                 return path[cycle_start:] + [neighbor]
 
+    # Cycle भेटिएन
     return None
