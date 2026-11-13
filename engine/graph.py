@@ -1,3 +1,4 @@
+import heapq
 
 def find_cycle(graph):
 
@@ -113,3 +114,69 @@ def find_cycle(graph):
 
     # Cycle भेटिएन
     return None
+
+
+
+
+
+
+class CycleError(ValueError):
+    def __init__(self, path):
+        self.path = path
+        super().__init__(f"Cycle detected: {' -> '.join(path)}")
+
+
+def topological_sort(graph):
+
+    # Step 1: Create in-degree and reverse graph
+    in_degree = {name: 0 for name in graph}
+    dependents = {name: [] for name in graph}
+
+    # Step 2: Build graph relationships
+    for task, dependencies in graph.items():
+
+        for dependency in dependencies:
+
+            # Ignore unknown dependencies
+            if dependency not in graph:
+                continue
+
+            in_degree[task] += 1
+            dependents[dependency].append(task)
+
+    # Step 3: Find all ready tasks
+    ready = [
+        task
+        for task, count in in_degree.items()
+        if count == 0
+    ]
+
+    # Min Heap: alphabetical order
+    heapq.heapify(ready)
+
+    result = []
+
+    # Step 4: Kahn's Algorithm
+    while ready:
+
+        # Get smallest alphabetical task
+        task = heapq.heappop(ready)
+
+        result.append(task)
+
+        # Step 5: Remove completed task dependencies
+        for dependent in dependents[task]:
+
+            in_degree[dependent] -= 1
+
+            if in_degree[dependent] == 0:
+                heapq.heappush(ready, dependent)
+
+    # Step 6: Detect cycle using T8 function
+    if len(result) != len(graph):
+
+        path = find_cycle(graph)
+
+        raise CycleError(path)
+
+    return result
