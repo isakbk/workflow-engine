@@ -1,3 +1,6 @@
+from engine import graph
+from engine.graph import find_cycle
+from engine.models import Workflow
 
 def validate_definition(definition):
     errors = []
@@ -89,3 +92,23 @@ def validate_definition(definition):
                 errors.append(f"unknown dependency: {dependency}")
 
     return errors
+
+
+
+
+
+
+def build_graph(definition):
+    graph = {}
+
+    for task in definition["tasks"]:
+        name = task["name"]
+        dependencies = list(task.get("depends_on", []))
+
+        graph[name] = dependencies
+
+    return graph
+
+
+
+                  
