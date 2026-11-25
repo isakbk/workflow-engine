@@ -1,6 +1,6 @@
 
 from engine.models import Run, TaskRun
-from engine.definition import validate_definition, build_graph
+from engine.definition import validate_definition, build_graph,validate_executors
 from engine.graph import find_cycle
 from django.db import transaction
 
@@ -28,6 +28,8 @@ def create_run(workflow, trigger="MANUAL"):
 
     # 3. Validate workflow definition
     errors = validate_definition(definition)
+    execution_error=validate_executors(definition)
+    errors.extend(execution_error)
 
     if errors:
         raise RunNotAllowed("Workflow definition is invalid.")

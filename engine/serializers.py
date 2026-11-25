@@ -1,7 +1,8 @@
 
 from rest_framework import serializers
 from engine.models import Workflow
-from engine.definition import validate_definition, build_graph, find_cycle
+from engine.definition import validate_definition, build_graph, find_cycle,validate_executors
+
 
 
 class WorkflowSerializer(serializers.ModelSerializer):
@@ -28,6 +29,8 @@ class WorkflowSerializer(serializers.ModelSerializer):
 
         # Step 1: Shape validation
         errors = validate_definition(definition)
+        execuation_error=validate_executors(definition)
+        errors.extend(execuation_error)
 
         if errors:
             raise serializers.ValidationError({

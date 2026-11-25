@@ -1,7 +1,7 @@
 from engine import graph
 from engine.graph import find_cycle
 from engine.models import Workflow
-
+from engine.executors import get_executor, UnknownExecutor
 def validate_definition(definition):
     errors = []
 
@@ -94,7 +94,33 @@ def validate_definition(definition):
     return errors
 
 
+def validate_executors(definition):
+    errors = []
 
+    if not isinstance(definition, dict):
+        return errors
+
+    tasks = definition.get("tasks")
+
+    if not isinstance(tasks, list):
+        return errors
+
+    for task in tasks:
+        if not isinstance(task, dict):
+            continue
+
+        name = task.get("name")
+        fn = task.get("fn")
+
+        if not isinstance(fn, str):
+            continue
+
+        try:
+            get_executor(fn)
+        except UnknownExecutor:
+            errors.append(f"task '{name}': unknown fn '{fn}'")
+
+    return errors
 
 
 
